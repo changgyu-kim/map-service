@@ -26,7 +26,7 @@ public class User {
     private String img;
     private String role = "USER_ROLE";
 
-    public User(String login_id, String password, String name, String email, String birth, String phone, String gender, String img) {
+    public User(String login_id, String password, String name, String email, String birth, String phone, String gender) {
         require(isNotBlank(login_id));
         require(isNotBlank(password));
         require(isNotBlank(name));
@@ -35,7 +35,6 @@ public class User {
         require(isNotBlank(phone));
         require(isNotBlank(gender));
         validate(mathches(login_id, RegexType.LOGINID), ExceptionCode.FAIL_LOGIN_REQUEST);
-        validate(mathches(password, RegexType.PASSWORD), ExceptionCode.FAIL_LOGIN_REQUEST);
         validate(mathches(name, RegexType.NAME), ExceptionCode.FAIL_NAME_REQUEST);
         validate(mathches(email, RegexType.EMAIL), ExceptionCode.FAIL_EMAIL_REQUEST);
         validate(mathches(birth, RegexType.BIRTH), ExceptionCode.FAIL_BIRTH_REQUEST);
@@ -47,7 +46,6 @@ public class User {
         this.birth = birth;
         this.phone = phone;
         this.gender = gender;
-        this.img = img;
     }
 
 

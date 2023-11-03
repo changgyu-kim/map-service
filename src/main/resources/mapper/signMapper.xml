@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.dao.signMapper">
+    <insert id="insert" parameterType="User">
+        INSERT INTO user
+            (login_id, password, name, email, birth, phone, gender, img, role)
+        VALUES
+            (#{login_id}, #{password}, #{name},#{email},#{birth},#{phone},#{gender},#{img},#{role})
+    </insert>
+
+    <select id="findByLogin_id" parameterType="String" resultType="User">
+        select *
+        from user
+        where login_id = #{login_id}
+    </select>
+
+    <delete id="deleteAll">
+        delete from user
+    </delete>
+</mapper>
