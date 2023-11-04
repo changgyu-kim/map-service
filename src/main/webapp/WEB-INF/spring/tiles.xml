@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="root.*" template="/WEB-INF/views/layout/basic.jsp">
+        <put-attribute name="title" value="처음화면" />
+        <put-attribute name="header" value="/WEB-INF/views/component/header.jsp" />
+        <put-attribute name="aside" value="/WEB-INF/views/component/aside.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/component/footer.jsp" />
+    </definition>
+</tiles-definitions>

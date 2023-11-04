@@ -20,6 +20,23 @@
 
     <dependencies>
 
+        <!-- JSP 레이아웃을 위한 tiles 라이브러리 시작 -->
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+            <version>3.0.8</version>
+        </dependency>
+        <!-- JSP 레이아웃을 위한 tiles 라이브러리 끝 -->
+
+
+        <!-- JSP jstl 활용을 위한 라이브러리 시작 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!-- JSP jstl 활용을 위한 라이브러리 끝 -->
+
         <!-- Spring MVC 및 Spring 컨테이너를 구현할 때 필요한 기본적인 의존성을 설정하는데 사용하는 라이브러리 시작 -->
         <dependency>
             <groupId>org.springframework</groupId>
