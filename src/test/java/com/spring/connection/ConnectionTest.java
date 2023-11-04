@@ -16,7 +16,7 @@ public class ConnectionTest {
     DataSource ds;
 
     @Test
-    public void test() throws Exception {
+    public void DB연동_성공() throws Exception {
 
         Connection conn = null;
 

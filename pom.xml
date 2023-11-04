@@ -88,12 +88,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- 다양한 Assertions 테스트검증 메서드를 사용할 수있는 라이브러리 시작 -->
+        <!-- 다양한 Assertions 테스트검증 메서드를 사용할 수있는 라이브러리 시작 (scope 를 지우고 어플리케이션과 테스트 둘다 사용할 수 있도록 하기) -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.23.1</version>
-            <scope>test</scope>
         </dependency>
         <!-- 다양한 Assertions 테스트검증 메서드를 사용할 수있는 라이브러리 끝 -->
 
@@ -107,7 +106,7 @@
         </dependency>
         <!-- spring에 등록 된 빈을 test에서 사용할 수 있게 해주는 라이브러리 끝 -->
 
-
+        <!-- @test 어노테이션을 지원하는 라이브러리 시작 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -120,6 +119,25 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- @test 어노테이션을 지원하는 라이브러리 끝 -->
+
+        <!-- test 에서 다양한 어노테이션을 지원하는 라이브러리 시작 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- test 에서 다양한 어노테이션을 지원하는 라이브러리 끝 -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.restdocs/spring-restdocs-mockmvc -->
+        <dependency>
+            <groupId>org.springframework.restdocs</groupId>
+            <artifactId>spring-restdocs-mockmvc</artifactId>
+            <version>2.0.5.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+
         <!-- mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
