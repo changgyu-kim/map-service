@@ -7,13 +7,13 @@
         INSERT INTO user
             (login_id, password, name, email, birth, phone, gender, img, role)
         VALUES
-            (#{login_id}, #{password}, #{name},#{email},#{birth},#{phone},#{gender},#{img},#{role})
+            (#{loginId}, #{password}, #{name},#{email},#{birth},#{phone},#{gender},#{img},#{role})
     </insert>
 
-    <select id="findByLogin_id" parameterType="String" resultType="User">
+    <select id="findByLoginId" parameterType="String" resultType="User">
         select *
         from user
-        where login_id = #{login_id}
+        where login_id = #{loginId}
     </select>
 
     <delete id="deleteAll">

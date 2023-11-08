@@ -1,15 +1,16 @@
 package com.spring.controller.dto;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public class SignInDto {
-    private String login_id;
+    private String loginId;
     private String password;
 
-    public SignInDto(String login_id, String password) {
-        this.login_id = login_id;
+    public SignInDto(){}
+
+    public SignInDto(String loginId, String password) {
+        this.loginId = loginId;
         this.password = password;
     }
 }

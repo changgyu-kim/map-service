@@ -3,11 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spring.dao.userMapper">
-    <insert id="insert" parameterType="User">
-        INSERT INTO user
-            (email, password, email)
-        VALUES
-            (#{email}, #{password}, #{email})
-    </insert>
+    <select id="findById" parameterType="int" resultType="User">
+        select *
+        from user
+        where id = #{id}
+    </select>
+
+    <update id="update" parameterType="User">
+    update user
+    set password = #{password}, name = #{name}, email = #{email}, phone = #{phone}
+    where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+    delete from user
+    where id = #{id};
+    </delete>
+
 
 </mapper>

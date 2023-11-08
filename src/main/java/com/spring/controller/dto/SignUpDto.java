@@ -1,11 +1,10 @@
 package com.spring.controller.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@Getter
+@Data
 public class SignUpDto {
-    private String login_id;
+    private String loginId;
     private String password;
     private String passwordC;
     private String name;
@@ -14,8 +13,9 @@ public class SignUpDto {
     private String phone;
     private String gender;
 
-    public SignUpDto(String login_id, String password, String passwordC, String name, String email, String birth, String phone, String gender) {
-        this.login_id = login_id;
+    public SignUpDto(){}
+    public SignUpDto(String loginId, String password, String passwordC, String name, String email, String birth, String phone, String gender) {
+        this.loginId = loginId;
         this.password = password;
         this.passwordC = passwordC;
         this.name = name;
@@ -24,4 +24,5 @@ public class SignUpDto {
         this.phone = phone;
         this.gender = gender;
     }
+
 }

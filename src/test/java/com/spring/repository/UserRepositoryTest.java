@@ -14,24 +14,30 @@ import org.springframework.transaction.annotation.Transactional;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/applicationContext.xml"})
 @Transactional
-class SignRepositoryTest {
+class UserRepositoryTest {
 
     @Autowired
     SignRepository signRepository;
+    
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Test
-    void 유저정보_저장_성공() {
+    void 유저_수정_성공() {
         int result = signRepository.insert(new User("loginId", "12345asd", "이름", "test@test.com", "19950128", "01012345678", "남"));
-        Assertions.assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    void 유저정보_찾기_성공() {
-        int result = signRepository.insert(new User("loginId",passwordEncoder.encode("12345asd"),"이름","test@test.com","19950128","01012345678","남"));
         User user = signRepository.findByLoginId("loginId");
-        Assertions.assertThat(user.getId()).isNotNull();
+        user.update(passwordEncoder.encode("1234asdf"),"테스트","tttt@tttt.com","01087882572");
+        int updateUser = userRepository.update(user);
+        Assertions.assertThat(updateUser).isEqualTo(1);
+    }
+    @Test
+    void 유저_삭제_성공() {
+        int result = signRepository.insert(new User("loginId", "12345asd", "이름", "test@test.com", "19950128", "01012345678", "남"));
+        User user = signRepository.findByLoginId("loginId");
+        int deleteUser = userRepository.delete(user.getId());
+        Assertions.assertThat(deleteUser).isEqualTo(1);
     }
 }

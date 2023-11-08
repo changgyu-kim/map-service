@@ -31,7 +31,7 @@ class SignServiceImplTest {
 
     @Test
     void 회원가입_성공() {
-        SignUpDto dto = new SignUpDto("loginId",passwordEncoder.encode("12345asd"),"12345asd","이름","test@test.com","19950128","01012345678","남");
+        SignUpDto dto = new SignUpDto("loginId","12345asd","12345asd","이름","test@test.com","19950128","01012345678","남");
         int result = signService.signUp(dto);
         Assertions.assertThat(result).isEqualTo(1);
     }
