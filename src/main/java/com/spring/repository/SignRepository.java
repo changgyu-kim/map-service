@@ -4,8 +4,6 @@ import com.spring.entity.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 public class SignRepository {
 
@@ -18,7 +16,7 @@ public class SignRepository {
     }
 
     public int insert(User user){ return session.insert(namespace+"insert",user);}
-    public User findByLogin_id(String login_id){ return session.selectOne(namespace+"findByLogin_id",login_id);}
+    public User findByLoginId(String loginId){ return session.selectOne(namespace+"findByLoginId",loginId);}
 
 
 }

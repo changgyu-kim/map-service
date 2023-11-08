@@ -8,7 +8,13 @@
                             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 애노테이션 활성화 -->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes" value="application/json;charset=UTF-8" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- tiles 설정 -->
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -28,6 +34,7 @@
     </bean>
 
     <mvc:resources location="/static/" mapping="/**" />
+
 
     <context:component-scan base-package="com.spring"/>
 

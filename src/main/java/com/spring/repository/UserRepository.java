@@ -2,7 +2,6 @@ package com.spring.repository;
 
 import com.spring.entity.User;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,5 +15,10 @@ public class UserRepository {
 
     public String namespace = "com.spring.dao.userMapper.";
 
-    public int insert(User user){return session.insert(namespace+"insert",user);}
+    public User findById(int id){return session.selectOne(namespace+"findById",id);}
+
+    public int update(User user){return session.update(namespace+"update",user);}
+
+    public int delete(int id){return session.delete(namespace+"delete",id);}
+
 }
