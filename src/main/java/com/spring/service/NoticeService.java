@@ -12,7 +12,7 @@ public interface NoticeService {
     int create(NoticeCreateDto dto, User user);
 
     Notice getOneNotice(int id);
-    List<Notice> getNotices();
+    List<Notice> getNotices(String keyword, int curPage, int pageSize);
 
 
     Notice update(int id, NoticeUpdateDto dto);

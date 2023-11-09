@@ -12,7 +12,7 @@
                 </a>
                 <strong><a style="margin-left: 10px" href="/" class="link-light text-decoration-none">착한업소</a></strong>
                 <ul style="margin-left: 100px" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 link-light">장소리스트</a></li>
+                    <li><a href="/notice" class="nav-link px-2 link-light">장소리스트</a></li>
                     <li><a href="#" class="nav-link px-2 link-light">null</a></li>
                     <li><a href="#" class="nav-link px-2 link-light">null</a></li>
                 </ul>

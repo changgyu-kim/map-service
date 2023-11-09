@@ -22,9 +22,19 @@
         where id = #{id}
     </select>
 
-    <select id="findAll"  resultType="Notice">
+    <select id="findAll" parameterType="map" resultType="Notice">
         select *
         from notice
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and title like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or content like CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+        order by id desc
+            limit #{offset}, #{pageSize}
     </select>
 
     <update id="update" parameterType="Notice">

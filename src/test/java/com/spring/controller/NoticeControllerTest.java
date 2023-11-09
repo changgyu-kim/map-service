@@ -78,6 +78,17 @@ class NoticeControllerTest {
         ;
     }
     @Test
+    void 공지사항_리스트조회_성공() throws Exception {
+        noticeRepository.insert(new Notice("제목1","내용1","Y","작성자1"));
+        noticeRepository.insert(new Notice("제목2","내용2","Y","작성자2"));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/notices"))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("code").value("S000"))
+        ;
+    }
+    @Test
     void 공지사항_수정_성공() throws Exception {
         noticeRepository.insert(new Notice("제목","내용","Y","작성자"));
         Notice notice = noticeRepository.getTestNotice("제목");

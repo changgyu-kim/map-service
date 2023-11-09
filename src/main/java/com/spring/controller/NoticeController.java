@@ -8,13 +8,13 @@ import com.spring.entity.Notice;
 import com.spring.entity.User;
 import com.spring.service.NoticeService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
-@Controller
+@RestController
 public class NoticeController {
 
     private final NoticeService noticeService;
@@ -28,6 +28,14 @@ public class NoticeController {
         User user = (User) session.getAttribute("user");
         noticeService.create(dto, user);
         return Result.created();
+    }
+    @GetMapping("/notices")
+    public ResponseEntity<ApiResult<List<Notice>>> getNotices(@RequestParam(required = false) String keyword ,
+                                   @RequestParam(defaultValue = "1") int curPage,
+                                   @RequestParam(defaultValue = "2") int pageSize){
+           List<Notice> notices = noticeService.getNotices(keyword, curPage, pageSize);
+
+           return Result.ok(notices);
     }
     @GetMapping("/notice/{id}")
     public ResponseEntity<ApiResult<Notice>> getOneNotice(@PathVariable int id, Model m){

@@ -19,7 +19,10 @@ public class RouteController {
     public String signUp(){
         return "sign-up";
     }
-
     @GetMapping("/mypage")
     public String mypage(){ return "root.mypage";}
+    @GetMapping("/notice")
+    public String notice(){
+        return "root.notice";
+    }
 }

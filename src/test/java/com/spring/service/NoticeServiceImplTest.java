@@ -15,6 +15,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/applicationContext.xml"})
@@ -47,6 +49,15 @@ class NoticeServiceImplTest {
         noticeRepository.insert(new Notice("제목","내용","Y","작성자"));
 
         CustomExceptionTest.assertThatCustomException(ExceptionCode.NOT_FOUND_NOTICE).isThrownBy(()-> noticeService.getOneNotice(1));
+
+    }
+    @Test
+    void 공지사항_리스트조회_성공() {
+        noticeRepository.insert(new Notice("제목1","내용1","Y","작성자1"));
+        noticeRepository.insert(new Notice("제목2","내용2","Y","작성자2"));
+        List<Notice> notices =  noticeService.getNotices("1",1,2);
+        Assertions.assertThat(notices.size()).isEqualTo(1);
+
 
     }
     @Test

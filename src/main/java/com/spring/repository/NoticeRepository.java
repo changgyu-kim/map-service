@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class NoticeRepository {
@@ -21,7 +22,7 @@ public class NoticeRepository {
 
     public Notice getTestNotice(String title){return session.selectOne(namespace+"getTestNotice",title);}
     public Notice findById(int id){return session.selectOne(namespace+"findById",id);}
-    public List<Notice> findAll(){return session.selectList(namespace+"findAll");}
+    public List<Notice> findAll(Map map){return session.selectList(namespace+"findAll",map);}
     public int update(Notice notice) {return session.update(namespace+"update",notice);}
     public int delete(int id) {return session.delete(namespace+"delete",id);}
 
