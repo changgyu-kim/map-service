@@ -33,5 +33,6 @@ class SignRepositoryTest {
         int result = signRepository.insert(new User("loginId",passwordEncoder.encode("12345asd"),"이름","test@test.com","19950128","01012345678","남"));
         User user = signRepository.findByLoginId("loginId");
         Assertions.assertThat(user.getId()).isNotNull();
+        Assertions.assertThat(user.getLoginId()).isEqualTo("loginId");
     }
 }

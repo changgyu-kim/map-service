@@ -84,19 +84,19 @@
       let loginId = $('#loginId').val();
       let password = $('#password').val();
       $.ajax({
-          url: "/sign-in",
-          type: "POST",
-          contentType: 'application/json',
-          data: JSON.stringify({"loginId" : loginId, "password" : password}),
-          success(data){
-            console.log(data);
-            alert("로그인이 완료되었습니다.");
-            location.href = "/";
-          },
-          error(error){
-            console.error(error);
-            alert("아이디 또는 패스워드가 일치하지 않습니다.");
-          }
+        url: "/sign-in",
+        type: "POST",
+        contentType: 'application/json',
+        data: JSON.stringify({"loginId" : loginId, "password" : password}),
+        success(data){
+          console.log(data);
+          alert("로그인이 완료되었습니다.");
+          location.href = "/";
+        },
+        error(error){
+          console.error(error);
+          alert("아이디 또는 패스워드가 일치하지 않습니다.");
+        }
       })
     }
 
