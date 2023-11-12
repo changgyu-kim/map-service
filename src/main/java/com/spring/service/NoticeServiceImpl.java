@@ -49,6 +49,7 @@ public class NoticeServiceImpl implements NoticeService{
         if(keyword != null){
             map.put("keyword",keyword);
         }
+
         return noticeRepository.findAll(map);
 
     }

@@ -1,14 +1,14 @@
 (function ($){
     // $.paging() 으로 html에서 호출할 수 있다.
-   $.fn.paging = function(options){
+    $.fn.paging = function(options){
 
        // ex) notice.html 에서 $('pageNav')가 이 함수를 호출했으면 호출한 선택자로 curThis값을 초기화 한다는 것
        let curThis = this;
        let defaults = {
            currentPage: 1, // 보여줄 현재페이지
-           pageSize:2, // 한 페이지 당 몇개 보여줄 지
+           pageSize:5, // 한 페이지 당 몇개 보여줄 지
            pageTotal: 0, // 총 데이터 수
-           pageBlock: 10, // 1~10 단위로 페이징을 끊어서 보여줌
+           pageBlock: 5, // 1~5 단위로 페이징을 끊어서 보여줌
        };
 
        // $.extend()란 두개의 객체를 하나로 합치는 것
@@ -42,14 +42,14 @@
            let startPage, endPage;
            // 동적 으로 html태그를 담을 변수
            let html = "";
-            
+
            // 페이징블럭 갯수가 1보다 크면
            if(pageBlock > 1){
                // startPage 에 현재 보여지는 paging에서 맨 앞번호를 넣는다
                startPage = (pageBlockCnt - 1) * pageBlock + 1;
            }
 
-           // 페이징 블럭 갯수 * 페이징블럭 이 전체 페이지갯수 보다 크거나 같다면 
+           // 페이징 블럭 갯수 * 페이징블럭 이 전체 페이지갯수 보다 크거나 같다면
            if( (pageBlockCnt * pageBlock) >= pageTotalCnt){
                // 엔드 페이지는 전체 페이지 갯수랑 같고
                 endPage = pageTotalCnt;
