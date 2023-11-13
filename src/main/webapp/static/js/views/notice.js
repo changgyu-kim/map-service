@@ -8,7 +8,7 @@ $(document).ready(function () {
 });
 
 function search(curpage) {
-    let keyword = $('#search').val();
+    let keyword = $('#keywordSearch').val();
     $.ajax({
         type: "GET",
         url: `/notices?curPage=${curpage}&keyword=${keyword}`,
@@ -32,7 +32,7 @@ function search(curpage) {
 };
 
 function paging(curpage){
-    let keyword = $('#search').val();
+    let keyword = $('#keywordSearch').val();
     $.ajax({
         type: "GET",
         url: `/paging?curPage=${curpage}&keyword=${keyword}`,
