@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.dao.noticeMapper">
+    <insert id="insert" parameterType="Notice">
+        INSERT INTO notice
+            (title, content, secret, writer, createdAt)
+        VALUES
+            (#{title}, #{content}, #{secret},#{writer},#{createdAt})
+    </insert>
+
+    <select id="getTestNotice" parameterType="String" resultType="Notice">
+        select *
+        from notice
+        where title = #{title}
+    </select>
+
+    <select id="findById" parameterType="int" resultType="Notice">
+        select *
+        from notice
+        where id = #{id}
+    </select>
+
+    <select id="findAll" parameterType="map" resultType="Notice">
+        select *
+        from notice
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and title like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or content like CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+        order by id desc
+            limit #{offset}, #{pageSize}
+    </select>
+
+    <update id="update" parameterType="Notice">
+        update notice
+        set title = #{title}, content = #{content}, secret = #{secret}, createdAt = #{createdAt}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from notice
+        where id = #{id};
+    </delete>
+</mapper>

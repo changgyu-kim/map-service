@@ -7,10 +7,12 @@ import com.spring.entity.User;
 import com.spring.repository.SignRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.spring.core.exception.CustomException.validate;
 
 @Service
+@Transactional
 public class SignServiceImpl implements SignService{
 
     private SignRepository signRepository;

@@ -197,10 +197,11 @@
         success(data){
           console.log("data : ",data);
           alert("회원가입이 완료되었습니다.");
+
           location.href = "/sign-in";
         },
         error(error){
-          console.error(error);
+          console.error(error.data);
           alert("입력된 정보가 올바르지 않습니다.");
         }
       })

@@ -21,7 +21,7 @@
     <!-- 카카오 목적지 API를 자바스크립트에서 활용할 수 있도록 함 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5ae6f84e4f5f3abd29cda4b36cf96f4d&libraries=services"></script>
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 <tiles:insertAttribute name="header"/>

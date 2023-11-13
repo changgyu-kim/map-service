@@ -1,6 +1,12 @@
+/*
 package com.spring.core.exception;
 
-/*@ControllerAdvice
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ControllerAdvice
 public class AllExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({Throwable.class})
@@ -22,4 +28,5 @@ public class AllExceptionHandler {
         System.out.println(e.getMessage());
         return "error";
     }
-}*/
+}
+*/
