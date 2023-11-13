@@ -24,9 +24,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/applicationContext.xml"})
@@ -67,8 +65,7 @@ class CrawlingTest {
             }
         return null;
     }
-    static List<Store> list = new ArrayList<>();
-    static Queue Q = new LinkedList();
+    static List<Store> storeList = new ArrayList<>();
     @Test
     void 데이터크롤링_성공() {
         Path path = Paths.get(System.getProperty("user.dir"),"src/main/resources/driver/chromedriver.exe");
@@ -93,6 +90,7 @@ class CrawlingTest {
                 goToNextPage(driver,currentPage+1);
             }
         } finally {
+            storeRepository.insertList(storeList);
             driver.quit();
         }
 
@@ -134,21 +132,21 @@ class CrawlingTest {
         }
 
         for (int i = 1; i < maxElements; i++) {
-            for (Elements elements : elementsArray) {
-                System.out.println("여기다가 저장하고");
+            List htmlList = new ArrayList();
 
+            for (Elements elements : elementsArray) {
                 if (i < elements.size()) {
                     Element currentElement = elements.get(i);
                     //System.out.println(currentElement.text());
-                    Q.offer(currentElement.text());
+                    htmlList.add(currentElement.text());
                 }
             }
-            System.out.println("Store 객체에 내용 저장한 다음 List에 담자");
-            Store store = new Store((int)Q.poll(),(String) Q.poll(),(String) Q.poll(),(String) Q.poll(),(String) Q.poll(),(String) Q.poll(),(String) Q.poll(),"123.123","123.556");
+
+            Store store = new Store(Integer.parseInt((String) htmlList.get(0)),(String)htmlList.get(1),(String)htmlList.get(2),(String)htmlList.get(3),(String)htmlList.get(4),(String)htmlList.get(5),(String)htmlList.get(6),"123.123","123.556");
             System.out.println(store.getId());
             System.out.println(store.getName());
             System.out.println(store.getAddress());
-            list.add(store);
+            storeList.add(store);
         }
     }
 }
