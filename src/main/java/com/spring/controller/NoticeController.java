@@ -8,14 +8,13 @@ import com.spring.entity.Notice;
 import com.spring.entity.User;
 import com.spring.service.NoticeService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@Controller
+@RestController
 public class NoticeController {
 
     private final NoticeService noticeService;
@@ -24,14 +23,12 @@ public class NoticeController {
         this.noticeService = noticeService;
     }
 
-    @ResponseBody
     @PostMapping("/notice-create")
     public ResponseEntity<ApiResult<?>> create(@RequestBody NoticeCreateDto dto, HttpSession session){
         User user = (User) session.getAttribute("user");
         noticeService.create(dto, user);
         return Result.created();
     }
-    @ResponseBody
     @GetMapping("/notices")
     public ResponseEntity<ApiResult<List<Notice>>> getNotices(@RequestParam(required = false) String keyword ,
                                    @RequestParam(defaultValue = "1") int curPage,
@@ -41,13 +38,11 @@ public class NoticeController {
            return Result.ok(notices);
     }
     @GetMapping("/notice/{id}")
-    public String getOneNotice(@PathVariable int id, Model m){
+    public ResponseEntity<ApiResult<Notice>> getOneNotice(@PathVariable int id){
         Notice notice = noticeService.getOneNotice(id);
-        m.addAttribute("notice",notice);
 
-        return "root.noticeDetail";
+        return Result.ok(notice);
     }
-    @ResponseBody
     @PatchMapping("/notice/{id}")
     public ResponseEntity<ApiResult<Notice>> update(@PathVariable int id, @RequestBody NoticeUpdateDto dto, Model m){
         Notice notice = noticeService.update(id, dto);
@@ -55,7 +50,6 @@ public class NoticeController {
         return Result.ok(notice);
     }
 
-    @ResponseBody
     @DeleteMapping("/notice/{id}")
     public ResponseEntity<ApiResult<?>> delete(@PathVariable int id){
         noticeService.delete(id);

@@ -17,7 +17,7 @@ function search(curpage) {
             for (const notice of response.data) {
                 html += `<tr>
                         <td> ${notice.id} </td>
-                        <td><a href="/notice/${notice.id}">${notice.title}</a></td>
+                        <td><a href="/notice-detail/${notice.id}">${notice.title}</a></td>
                         <td>${notice.writer}</td>
                     </tr>`;
             }

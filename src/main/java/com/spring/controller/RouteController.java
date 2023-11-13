@@ -40,6 +40,12 @@ public class RouteController {
     public String noticeWrite(){
         return "root.noticeWrite";
     }
+    @GetMapping("/notice-detail/{id}")
+    public String getOneNotice(@PathVariable int id, Model m){
+        m.addAttribute("id",id);
+
+        return "root.noticeDetail";
+    }
     @GetMapping("/notice-update/{id}")
     public String noticeUpdate(@PathVariable int id, Model m){
         Notice notice = noticeService.getOneNotice(id);
