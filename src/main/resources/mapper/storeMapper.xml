@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.dao.storeMapper">
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT INTO store
+        (id, sort, name, mainMenu, price, phone, address, lat, lng)
+        VALUES
+        <foreach collection="list" item="store" separator=",">
+            (#{store.id}, #{store.sort}, #{store.name}, #{store.mainMenu}, #{store.price}, #{store.phone}, #{store.address}, #{store.lat}, #{store.lng})
+        </foreach>
+    </insert>
+
+</mapper>

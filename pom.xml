@@ -20,6 +20,38 @@
 
     <dependencies>
 
+        <!-- 주소를 위도와 경도로 변환해주는 라이브러리 시작 -->
+        <dependency>
+            <groupId>com.google.code.geocoder-java</groupId>
+            <artifactId>geocoder-java</artifactId>
+            <version>0.16</version>
+        </dependency>
+        <!-- 주소를 위도와 경도로 변환해주는 라이브러리 끝 -->
+
+
+        <!-- 웹 크롤링을 위한 라이브러리 시작 -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.15.3</version>
+        </dependency>
+        <!-- 웹 크롤링을 위한 라이브러리 끝 -->
+
+
         <!-- @Transaction 의존성 추가 시작 -->
         <dependency>
             <groupId>org.springframework</groupId>

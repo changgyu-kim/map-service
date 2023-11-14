@@ -6,5 +6,6 @@
     <typeAliases>
         <typeAlias alias="User" type="com.spring.entity.User"/>
         <typeAlias alias="Notice" type="com.spring.entity.Notice"/>
+        <typeAlias alias="Store" type="com.spring.entity.Store"/>
     </typeAliases>
 </configuration>

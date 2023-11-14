@@ -14,7 +14,7 @@
     </div>
 
     <!--현재위치 클릭박스 -->
-    <button id="current" type="button" class="text-decoration-none btn btn-Secondary">현재 위치</button>
+    <button id="current" type="button" class="text-decoration-none btn btn-light">현재위치</button>
     <!-- 화면에 네이버지도를 출력 -->
     <div id="map" style="width:100%;height:100vh;"></div>
 </div>
