@@ -1,8 +1,8 @@
 package com.spring.utils.crawling;
 
-import com.google.code.geocoder.Geocoder;
-import com.google.code.geocoder.GeocoderRequestBuilder;
-import com.google.code.geocoder.model.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.entity.Store;
 import com.spring.repository.StoreRepository;
 import org.jsoup.Jsoup;
@@ -17,10 +17,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -34,40 +43,49 @@ class CrawlingTest {
     private StoreRepository storeRepository;
 
     @Test
-    void 지오코딩테스트() {
-        String location = "경기도 성남시 분당구 삼평동";
-        Float[] coords = geoCoding(location);
-        System.out.println(location);
+    void 카카오API_주소로_위도경도구하기_성공() throws URISyntaxException, UnsupportedEncodingException, JsonProcessingException {
+        // Kakao API 키를 설정합니다.
+        String REST_API_KEY = "46214ea45c00cb5faca592370d02aa07";
+        String address = URLEncoder.encode( "전북 익산시 삼성동 100", StandardCharsets.UTF_8.toString());
+
+        // RestTemplate 인스턴스를 생성합니다.
+        RestTemplate rt = new RestTemplate();
+
+        // HttpHeaders를 설정합니다.
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "KakaoAK " + REST_API_KEY);
+
+        // URI를 설정합니다.
+        URI uri = new URI("https://dapi.kakao.com/v2/local/search/address.json?query=" +
+                    address);
+
+        // Http 요청을 수행하고 응답을 받습니다.
+        ResponseEntity<String> response = rt.exchange(
+                uri,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                String.class
+        );
+
+        // JSON 파싱을 위해 ObjectMapper를 생성합니다.
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // JSON을 읽어 JsonNode로 변환합니다.
+        JsonNode jsonNode = objectMapper.readTree(response.getBody());
+
+
+        // 첫 번째 주소의 "x"와 "y" 값을 추출합니다.
+        String firstX = jsonNode.path("documents").path(0).path("address").path("x").asText();
+        String firstY = jsonNode.path("documents").path(0).path("address").path("y").asText();
+
+        // 추출한 값 출력
+        System.out.println("경도 : " + firstX + ", 위도 : " + firstY);
+
     }
 
-    public static Float[] geoCoding(String location) {
-        if (location == null){
-            return null;
-        }
-        Geocoder geocoder = new Geocoder();
-        GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location).setLanguage("ko").getGeocoderRequest();
-        GeocodeResponse geocoderResponse;
-
-        try {
-            geocoderResponse = geocoder.geocode(geocoderRequest);
-            System.out.println("geocoderRequest = " + geocoderResponse.getResults());
-            System.out.println("geocoderRequest = " + geocoderResponse.getStatus());
-            if (geocoderResponse.getStatus() == GeocoderStatus.OK & !geocoderResponse.getResults().isEmpty()) {
-                GeocoderResult geocoderResult=geocoderResponse.getResults().iterator().next();
-                LatLng latitudeLongitude = geocoderResult.getGeometry().getLocation();
-                Float[] coords = new Float[2];
-                coords[0] = latitudeLongitude.getLat().floatValue();
-                coords[1] = latitudeLongitude.getLng().floatValue();
-                return coords;
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            }
-        return null;
-    }
     static List<Store> storeList = new ArrayList<>();
     @Test
-    void 데이터크롤링_성공() {
+    void 데이터크롤링_성공() throws Exception {
         Path path = Paths.get(System.getProperty("user.dir"),"src/main/resources/driver/chromedriver.exe");
 
         System.setProperty("webdriver.chrome.driver", path.toString());
@@ -95,7 +113,7 @@ class CrawlingTest {
         }
 
     }
-    private static void crawlPage(ChromeDriver driver) {
+    private static void crawlPage(ChromeDriver driver) throws Exception {
 
         // 여기서 Jsoup을 사용하여 현재 페이지의 HTML을 가져올 수 있습니다.
         Document document = Jsoup.parse(driver.getPageSource());
@@ -125,7 +143,7 @@ class CrawlingTest {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("board_one")));
     }
 
-    private static void printElementsInSequence(Elements... elementsArray) {
+    private static void printElementsInSequence(Elements... elementsArray) throws Exception {
         int maxElements = 0;
         for (Elements elements : elementsArray) {
             maxElements = Math.max(maxElements, elements.size());
@@ -137,16 +155,60 @@ class CrawlingTest {
             for (Elements elements : elementsArray) {
                 if (i < elements.size()) {
                     Element currentElement = elements.get(i);
-                    //System.out.println(currentElement.text());
                     htmlList.add(currentElement.text());
                 }
             }
+            // 여기서 지오코딩으로 주소 받아서 위도경도 만들어야함
+            List<String> latLng = getLatLng((String) htmlList.get(6));
 
-            Store store = new Store(Integer.parseInt((String) htmlList.get(0)),(String)htmlList.get(1),(String)htmlList.get(2),(String)htmlList.get(3),(String)htmlList.get(4),(String)htmlList.get(5),(String)htmlList.get(6),"123.123","123.556");
+            Store store = new Store(Integer.parseInt((String) htmlList.get(0)),(String)htmlList.get(1),(String)htmlList.get(2),(String)htmlList.get(3),(String)htmlList.get(4),(String)htmlList.get(5),(String)htmlList.get(6),latLng.get(0),latLng.get(1));
             System.out.println(store.getId());
             System.out.println(store.getName());
             System.out.println(store.getAddress());
             storeList.add(store);
         }
+    }
+    private static List<String> getLatLng(String address) throws Exception {
+
+        List<String> latLngList = new ArrayList<>();
+
+        // Kakao API 키를 설정합니다.
+        String REST_API_KEY = "46214ea45c00cb5faca592370d02aa07";
+        String encodedaddress = URLEncoder.encode( address, StandardCharsets.UTF_8.toString());
+
+        // RestTemplate 인스턴스를 생성합니다.
+        RestTemplate rt = new RestTemplate();
+
+        // HttpHeaders를 설정합니다.
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "KakaoAK " + REST_API_KEY);
+
+        // URI를 설정합니다.
+        URI uri = new URI("https://dapi.kakao.com/v2/local/search/address.json?query=" +
+                encodedaddress);
+
+        // Http 요청을 수행하고 응답을 받습니다.
+        ResponseEntity<String> response = rt.exchange(
+                uri,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                String.class
+        );
+
+        // JSON 파싱을 위해 ObjectMapper를 생성합니다.
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // JSON을 읽어 JsonNode로 변환합니다.
+        JsonNode jsonNode = objectMapper.readTree(response.getBody());
+
+
+        // 첫 번째 주소의 "x"와 "y" 값을 추출합니다.
+        String firstX = jsonNode.path("documents").path(0).path("address").path("x").asText();
+        String firstY = jsonNode.path("documents").path(0).path("address").path("y").asText();
+
+        // 추출한 값 출력
+        latLngList.add(firstX); // 위도
+        latLngList.add(firstY); // 경도
+        return latLngList;
     }
 }
