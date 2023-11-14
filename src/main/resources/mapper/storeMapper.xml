@@ -12,4 +12,9 @@
         </foreach>
     </insert>
 
+    <select id="findAll" resultType="Store">
+        select *
+        from store
+    </select>
+
 </mapper>

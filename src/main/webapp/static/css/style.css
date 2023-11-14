@@ -55,11 +55,11 @@ body {
     font-weight: bolder;
 }
 .marker {
-    border: 1px solid black;
-    background: green;
+    border: 0.5px solid black;
+    background: lightseagreen;
     opacity: 0.8;
-    width: 24px;
-    height: 24px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
 }
 

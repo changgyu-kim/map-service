@@ -19,4 +19,6 @@ public class StoreRepository {
 
     public int insertList(List<Store> storeList){return session.insert(namespace+"insertList",storeList);}
 
+    public List<Store> findAll(){return session.selectList(namespace+"findAll");}
+
 }

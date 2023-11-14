@@ -19,7 +19,6 @@ public class RouteController {
     @GetMapping("/")
     public String home(){
         return "root.index";
-
     }
     @GetMapping("/sign-in")
     public String signIn(){
