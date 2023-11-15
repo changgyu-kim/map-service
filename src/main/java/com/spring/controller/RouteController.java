@@ -35,6 +35,11 @@ public class RouteController {
 
         return "root.notice";
     }
+    @GetMapping("/store")
+    public String store(){
+
+        return "root.store";
+    }
     @GetMapping("/notice-write")
     public String noticeWrite(){
         return "root.noticeWrite";

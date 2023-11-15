@@ -4,7 +4,7 @@
 
 <mapper namespace="com.spring.dao.pagingMapper">
 
-    <select id="countAll" parameterType="String" resultType="int">
+    <select id="noticeCountAll" parameterType="String" resultType="int">
         select count(*)
         from notice
         <where>
@@ -13,6 +13,28 @@
             </if>
             <if test="keyword != null and keyword != ''">
                 or content like CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="storeCountAll" parameterType="String" resultType="int">
+        select count(*)
+        from store
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and sort like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or name like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or mainMenu like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or price like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or address like CONCAT('%', #{keyword}, '%')
             </if>
         </where>
     </select>

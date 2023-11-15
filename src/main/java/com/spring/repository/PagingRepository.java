@@ -14,6 +14,7 @@ public class PagingRepository {
     public String namespace = "com.spring.dao.pagingMapper.";
 
 
-    public int countAll(String keyword){return session.selectOne(namespace+"countAll",keyword);}
+    public int noticeCountAll(String keyword){return session.selectOne(namespace+"noticeCountAll",keyword);}
+    public int storeCountAll(String keyword){return session.selectOne(namespace+"storeCountAll",keyword);}
 
 }
