@@ -19,16 +19,4 @@
     <div id="map" style="width:100%;height:100vh;"></div>
 </div>
 </html>
-<script>
-    // map 변수를 초기화 할 때 쓸 mapOptions 변수 만들기
-    var mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 10
-    };
-
-    // id가 map인 지도를 mapOptions에 내용으로 초기화하여 보여줍니다.
-    var map = new naver.maps.Map('map', mapOptions);
-    $(document).ready(function () {
-
-    });
-</script>
+<script type="text/javascript" src="/js/views/index.js"></script>

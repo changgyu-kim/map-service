@@ -14,11 +14,17 @@ public class PagingServiceImpl implements PagingService{
     }
 
     @Override
-    public PageHandler pageHandler(String keyword, int curPage) {
+    public PageHandler noticePageHandler(String keyword, int curPage) {
 
-        int totalPage = pagingRepository.countAll(keyword);
+        int totalPage = pagingRepository.noticeCountAll(keyword);
 
         return new PageHandler(totalPage,curPage);
+    }
+    @Override
+    public PageHandler storePageHandler(String keyword, int curPage) {
 
+        int totalPage = pagingRepository.storeCountAll(keyword);
+
+        return new PageHandler(totalPage,curPage);
     }
 }

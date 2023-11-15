@@ -4,5 +4,6 @@ import com.spring.utils.paging.PageHandler;
 
 public interface PagingService {
 
-    PageHandler pageHandler(String keyword, int curPage);
+    PageHandler noticePageHandler(String keyword, int curPage);
+    PageHandler storePageHandler(String keyword, int curPage);
 }

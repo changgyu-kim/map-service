@@ -19,7 +19,6 @@ public class RouteController {
     @GetMapping("/")
     public String home(){
         return "root.index";
-
     }
     @GetMapping("/sign-in")
     public String signIn(){
@@ -35,6 +34,11 @@ public class RouteController {
     public String notice(){
 
         return "root.notice";
+    }
+    @GetMapping("/store")
+    public String store(){
+
+        return "root.store";
     }
     @GetMapping("/notice-write")
     public String noticeWrite(){

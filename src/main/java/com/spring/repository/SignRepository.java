@@ -18,5 +18,4 @@ public class SignRepository {
     public int insert(User user){ return session.insert(namespace+"insert",user);}
     public User findByLoginId(String loginId){ return session.selectOne(namespace+"findByLoginId",loginId);}
 
-
 }

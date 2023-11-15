@@ -33,4 +33,10 @@ class StoreRepositoryTest {
         int result = storeRepository.insertList(storeList);
         Assertions.assertThat(result).isEqualTo(3);
     }
+    @Test
+    void 매장_리스트조회_성공() {
+
+        List<Store> stores = storeRepository.findAll();
+        Assertions.assertThat(stores.size()).isNotNull();
+    }
 }

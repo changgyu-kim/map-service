@@ -11,19 +11,21 @@ function search(curpage) {
     let keyword = $('#keywordSearch').val();
     $.ajax({
         type: "GET",
-        url: `/notices?curPage=${curpage}&keyword=${keyword}`,
+        url: `/storeList?curPage=${curpage}&keyword=${keyword}`,
         success: function (response) {
             let html = "";
-            for (const notice of response.data) {
+            for (const store of response.data) {
                 html += `<tr>
-                        <td> ${notice.id} </td>
-                        <td><a href="/notice-detail/${notice.id}">${notice.title}</a></td>
-                        <td>${notice.writer}</td>
+                        <td> ${store.id} </td>
+                        <td>${store.sort}</a></td>
+                        <td>${store.name}</td>
+                        <td>${store.mainMenu}</td>
+                        <td>${store.price}</td>
+                        <td>${store.phone}</td>
+                        <td>${store.address}</td>
                     </tr>`;
             }
-
-            $('#list').empty().append(html); // empty()를 해야 앞에 불러온 데이터를 비우고 현재 값을 추가한다
-
+            $('#list').empty().append(html);
         },
         error: function (error) {
             console.error("error : ", error);
@@ -35,7 +37,7 @@ function paging(curpage){
     let keyword = $('#keywordSearch').val();
     $.ajax({
         type: "GET",
-        url: `/notice-paging?curPage=${curpage}&keyword=${keyword}`,
+        url: `/store-paging?curPage=${curpage}&keyword=${keyword}`,
         success: function (response) {
             <!-- 페이징  -->
             $('#pageNav').paging({

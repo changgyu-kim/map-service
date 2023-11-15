@@ -18,12 +18,18 @@ public class PagingController {
         this.pagingService = pagingService;
     }
 
-    @GetMapping("/paging")
-    public ResponseEntity<ApiResult<PageHandler>> paging(@RequestParam(required = false) String keyword ,
+    @GetMapping("/notice-paging")
+    public ResponseEntity<ApiResult<PageHandler>> noticePaging(@RequestParam(required = false) String keyword ,
                                                @RequestParam(defaultValue = "1") int curPage){
 
-        PageHandler pageHandler = pagingService.pageHandler(keyword, curPage);
+        PageHandler pageHandler = pagingService.noticePageHandler(keyword, curPage);
+        return Result.ok(pageHandler);
+    }
+    @GetMapping("/store-paging")
+    public ResponseEntity<ApiResult<PageHandler>> storePaging(@RequestParam(required = false) String keyword ,
+                                                         @RequestParam(defaultValue = "1") int curPage){
 
+        PageHandler pageHandler = pagingService.storePageHandler(keyword, curPage);
         return Result.ok(pageHandler);
     }
 }

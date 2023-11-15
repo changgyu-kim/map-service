@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class StoreRepository {
@@ -16,7 +17,10 @@ public class StoreRepository {
 
     public String namespace = "com.spring.dao.storeMapper.";
 
-
     public int insertList(List<Store> storeList){return session.insert(namespace+"insertList",storeList);}
+
+    public List<Store> findAll(){return session.selectList(namespace+"findAll");}
+
+    public List<Store> findList(Map map){return session.selectList(namespace+"findList",map);}
 
 }

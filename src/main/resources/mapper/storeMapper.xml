@@ -12,4 +12,32 @@
         </foreach>
     </insert>
 
+    <select id="findAll" resultType="Store">
+        select *
+        from store
+    </select>
+
+    <select id="findList" parameterType="map" resultType="Store">
+        select *
+        from store
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and sort like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or name like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or mainMenu like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or price like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="keyword != null and keyword != ''">
+                or address like CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+        order by id desc
+        limit #{offset}, #{pageSize}
+    </select>
 </mapper>
