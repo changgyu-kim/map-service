@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--  Body Wrapper -->
 <html>
+<link rel="stylesheet" type="text/css" href="/css/views/notice.css">
 <div class="container text-center">
     <div class="row">
         <div class="col-3">
