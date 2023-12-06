@@ -21,7 +21,7 @@ $(document).ready(function () {
     let currentUse = true;
 
     // 현재위치버튼 클릭 시 현재위치로 이동하는 함수 호출
-    currentPosition(currentUse);
+    currentPosition(map,currentUse);
 
 });
 
@@ -94,7 +94,7 @@ function closeAllInfoWindows() {
 }
 
 // 현재위치버튼 클릭 시 현재위치로 이동하는 함수
-function currentPosition(currentUse){
+function currentPosition(map, currentUse){
     // 현재위치가 클릭되었을때
     $('#current').click(() =>{
         // 만약 브라우저가 HTML5 Geolocation API를 지원한다면(navigator은 js에서 제공되는 객체로 현재 브라우저 환경에 대한 정보를 포함하고 있다)
